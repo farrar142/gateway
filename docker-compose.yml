@@ -1,0 +1,85 @@
+# redis-server.yml
+version: '3.7'
+services:
+  dev:
+    build:
+      dockerfile: docker/dev/dockerfile
+      context: .
+      args:
+        CONTAINER_NAME: ${CONTAINER_NAME}
+        PLATFORM: ${PLATFORM}
+    command: tail -f /dev/null
+    # command: "python3 manage.py runserver 0.0.0.0:8000"
+    # command: 'sh docker/dev/run.sh'
+    container_name: ${CONTAINER_NAME}
+    hostname: root
+    volumes:
+      - ~/.ssh:/root/.ssh:ro
+      - .:/usr/src/app
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - '${PORT}:8000'
+    restart: always
+    working_dir: /usr/src/app
+    environment:
+      TZ: 'Asia/Seoul'
+  deploy:
+    build:
+      dockerfile: docker/deploy/dockerfile
+      context: .
+      args:
+        CONTAINER_NAME: ${CONTAINER_NAME}
+        PLATFORM: ${PLATFORM}
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://172.17.0.1:${PORT}/gateway/']
+      interval: 30s
+      retries: 5
+      start_period: 10s
+    entrypoint: 'sh docker/deploy/gateway-run.sh ${WORKER_MULTIPLIER}'
+    container_name: ${CONTAINER_NAME}_deploy
+    # network_mode: host
+    hostname: root
+    volumes:
+      - /var/run/celery:/var/run
+      - ${PROJECT_DIR}:/tmp/base
+      - ${PROJECT_DIR}/static:/usr/src/app/static
+    # ports:
+    #   - '${PORT}:8000'
+    restart: unless-stopped
+    working_dir: /usr/src/app
+    environment:
+      TZ: 'Asia/Seoul'
+  internal:
+    build:
+      dockerfile: docker/deploy/dockerfile
+      context: .
+      args:
+        CONTAINER_NAME: ${CONTAINER_NAME}
+        PLATFORM: ${PLATFORM}
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://172.17.0.1:${PORT}/gateway/']
+      interval: 30s
+      retries: 5
+      start_period: 10s
+    entrypoint: 'sh docker/deploy/internal-run.sh 1'
+    container_name: ${CONTAINER_NAME}_internal_deploy
+    hostname: root
+    restart: unless-stopped
+    working_dir: /usr/src/app
+    environment:
+      TZ: 'Asia/Seoul'
+    ports:
+      - '${PORT}:8000'
+  redis:
+    image: redis:latest
+    command: redis-server --port 6379 --appendonly yes
+    container_name: ${CONTAINER_NAME}_redis
+    hostname: root
+    labels:
+      - 'name=redis'
+      - 'mode=standalone'
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    restart: unless-stopped
+    environment:
+      TZ: 'Asia/Seoul'

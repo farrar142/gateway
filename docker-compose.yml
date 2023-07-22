@@ -41,7 +41,7 @@ services:
     hostname: root
     volumes:
       - /var/run/celery:/var/run
-      - ${PROJECT_DIR}:/tmp/base
+      - ${PROJECT_DIR}/socket:/usr/src/app/socket
       - ${PROJECT_DIR}/static:/usr/src/app/static
     # ports:
     #   - '${PORT}:8000'

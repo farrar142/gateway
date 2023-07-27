@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "redirects",
     "rest_framework",
     "eventsourcing_django",
+    "drf_yasg",
 ]
 
 MIDDLEWARE = [

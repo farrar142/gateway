@@ -26,3 +26,4 @@ typing_extensions==4.5.0
 urllib3==1.26.15
 uvicorn==0.21.0
 mysqlclient
+drf-yasg==1.21.7

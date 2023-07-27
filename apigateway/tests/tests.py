@@ -17,3 +17,12 @@ SCHEME = "https"
 
 class TestApiGateway(TestCase):
     auth: Api
+    def test_query_param(self):
+        upstream = Upstream.objects.create(alias='SWAGGER',scheme="https",host="auth.honeycombpizza.link")
+        upstream.api_set.create(
+            name="swagger",
+            request_path='/swagger/users/',
+            wrapped_path='/swagger/users/'
+        )
+        print("get start ===========")
+        resp = self.client.get('/swagger/users/?format=openapi')

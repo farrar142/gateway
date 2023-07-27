@@ -107,6 +107,7 @@ DATABASES = {
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": os.getenv("DB_HOST"),
         "PORT": os.getenv("DB_PORT"),
+        "TEST": {"NAME": "test", "MIRROR": "default"},
         "OPTIONS": DB_OPTIONS,
         # "TEST": {"NAME": "auth_test", "MIRROR": "default"},
     },
@@ -204,6 +205,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "base.paginations.CursorPagination",
     "PAGE_SIZE": 10,
+"URL_FORMAT_OVERRIDE" : "_format"
 }
 
 SENTRY_DSN = os.getenv("SENTRY_DSN", None)

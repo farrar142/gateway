@@ -27,9 +27,8 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path("gateway/", admin.site.urls),
-    path("consul/", include(router.urls)),
+    # path("consul/", include(router.urls)),
     # path('',include(router.urls)),
     # path("", include(router.urls)),
-    re_path(rf"{RedirectionViewSet.PREFIX}/.*", RedirectionViewSet.as_view()),
     re_path(r".*", gateway.as_view()),
 ]

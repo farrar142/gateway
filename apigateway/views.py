@@ -126,6 +126,7 @@ class gateway(APIView):
                     upstream=api.upstream.pk,
                 )
         if not api:
+            print("no api found")
             raise exceptions.NotFound
         return api
 

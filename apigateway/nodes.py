@@ -189,6 +189,7 @@ class LoadBalancer(ServerConnectionRecord, Node):
             try:
                 node = self.load_balancing()  # LB로직을 수행하여 나온 노드를 반환
                 url = node.full_path + api.wrapped_path + trailing_path
+                print(f"{url=}")
                 # 노드의 전체 url과 랩된 주소, 나머지 주소를 결합하여 실제 요청을 보낼 주소를 반환
                 return self.method_map[method](
                     url, headers=headers, data=data, files=files, timeout=self.timeout

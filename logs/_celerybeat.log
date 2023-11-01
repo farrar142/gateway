@@ -1,0 +1,61 @@
+[2023-11-01 07:09:55,106: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2023-11-01 07:09:55,150: INFO/MainProcess] Connected to redis://host.docker.internal:6380/0
+[2023-11-01 07:09:55,153: WARNING/MainProcess] /usr/local/lib/python3.11/site-packages/celery/worker/consumer/consumer.py:507: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2023-11-01 07:09:55,166: INFO/MainProcess] mingle: searching for neighbors
+[2023-11-01 07:09:55,859: INFO/Beat] beat: Starting...
+[2023-11-01 07:09:55,871: ERROR/Beat] Process Beat
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/billiard/process.py", line 323, in _bootstrap
+    self.run()
+  File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 718, in run
+    self.service.start(embedded_process=True)
+  File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 634, in start
+    humanize_seconds(self.scheduler.max_interval))
+                     ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 31, in __get__
+    return super().__get__(instance, owner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+    val = self.func(instance)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 677, in scheduler
+    return self.get_scheduler()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 668, in get_scheduler
+    return symbol_by_name(self.scheduler_cls, aliases=aliases)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'module' object is not callable
+[2023-11-01 07:09:55,880: WARNING/Beat] Process Beat:
+[2023-11-01 07:09:55,881: WARNING/Beat] Traceback (most recent call last):
+[2023-11-01 07:09:55,882: WARNING/Beat]   File "/usr/local/lib/python3.11/site-packages/billiard/process.py", line 323, in _bootstrap
+    self.run()
+[2023-11-01 07:09:55,883: WARNING/Beat]   File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 718, in run
+    self.service.start(embedded_process=True)
+[2023-11-01 07:09:55,884: WARNING/Beat]   File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 634, in start
+    humanize_seconds(self.scheduler.max_interval))
+                     ^^^^^^^^^^^^^^
+[2023-11-01 07:09:55,885: WARNING/Beat]   File "/usr/local/lib/python3.11/site-packages/kombu/utils/objects.py", line 31, in __get__
+    return super().__get__(instance, owner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2023-11-01 07:09:55,886: WARNING/Beat]   File "/usr/local/lib/python3.11/functools.py", line 1001, in __get__
+    val = self.func(instance)
+          ^^^^^^^^^^^^^^^^^^^
+[2023-11-01 07:09:55,886: WARNING/Beat]   File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 677, in scheduler
+    return self.get_scheduler()
+           ^^^^^^^^^^^^^^^^^^^^
+[2023-11-01 07:09:55,887: WARNING/Beat]   File "/usr/local/lib/python3.11/site-packages/celery/beat.py", line 668, in get_scheduler
+    return symbol_by_name(self.scheduler_cls, aliases=aliases)(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[2023-11-01 07:09:55,888: WARNING/Beat] TypeError: 'module' object is not callable
+[2023-11-01 07:09:56,199: INFO/MainProcess] mingle: all alone
+[2023-11-01 07:09:56,243: INFO/MainProcess] master@node ready.

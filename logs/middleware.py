@@ -19,7 +19,7 @@ def get_origin(request: WSGIRequest):
 
 
 
-def handle_request(request: MockRequest):
+def handle_request(request: MockRequest,status_code=200):
     user_id = None
     if ip_address := get_origin(request):  # type:ignore
         ip_address = ip_address.split(",")[0]
@@ -37,6 +37,7 @@ def handle_request(request: MockRequest):
         ip_address=ip_address,
         path_info=path_info,
         method=request.method,
+        status_code=status_code
     )
 
 

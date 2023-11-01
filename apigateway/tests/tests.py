@@ -26,3 +26,5 @@ class TestApiGateway(TestCase):
         )
         print("get start ===========")
         resp = self.client.get('/swagger/users/?format=openapi')
+        from logs.models import Log
+        print(Log.objects.all())

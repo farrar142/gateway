@@ -50,9 +50,11 @@ INSTALLED_APPS = [
     "rest_framework",
     "eventsourcing_django",
     "drf_yasg",
+    "logs"
 ]
 
 MIDDLEWARE = [
+    "logs.middleware.request_logger",
     "base.middleware.DDOSBlocker",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",

@@ -32,7 +32,7 @@ def handle_request(request: MockRequest,status_code=200):
 
     if path_info.startswith("/gateway/"):
         return
-    create_log.delay(
+    create_log(
         user_id=user_id,
         ip_address=ip_address,
         path_info=path_info,
@@ -49,15 +49,15 @@ def request_logger(get_response):
 
         async def async_middleware(request):
             response = await get_response(request)
-            handle_request(request)
+            handle_request(request,status_code=response.status_code)
             return response
 
         function = async_middleware
     else:
 
         def middleware(request):
-            response = get_response(request)
-            handle_request(request)
+            response:HttpResponse = get_response(request)
+            handle_request(request,status_code=response.status_code)
             return response
 
         function = middleware

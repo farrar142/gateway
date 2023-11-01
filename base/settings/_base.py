@@ -162,7 +162,7 @@ CORS_ALLOW_HEADERS = (*default_headers, "Idempotency-Key", "idempotency-key", "a
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Seoul"
 
 USE_I18N = True
 
